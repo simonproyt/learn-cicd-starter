@@ -25,16 +25,11 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: notely-495116
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          export_default_credentials: true
 
-      - name: Authenticate to GCP explicitly
-        run: |
-          cat > /tmp/service-account.json <<'EOF'
-          ${{ secrets.GCP_CREDENTIALS }}
-          EOF
-          gcloud auth activate-service-account --key-file=/tmp/service-account.json
-          gcloud config set project notely-495116
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Build and push Docker image
         run: |
