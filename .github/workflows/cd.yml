@@ -31,8 +31,8 @@ jobs:
       - name: Authenticate to GCP explicitly
         run: |
           cat > /tmp/service-account.json <<'EOF'
-${{ secrets.GCP_CREDENTIALS }}
-EOF
+          ${{ secrets.GCP_CREDENTIALS }}
+          EOF
           gcloud auth activate-service-account --key-file=/tmp/service-account.json
           gcloud config set project notely-495116
 
