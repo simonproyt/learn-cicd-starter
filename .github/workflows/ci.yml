@@ -20,6 +20,10 @@ jobs:
 
       - name: Run unit tests
         run: go test ./... -cover
+      - name: Install staticcheck
+        run: go install honnef.co/go/tools/cmd/staticcheck@latest
+      - name: Run staticcheck
+        run: staticcheck ./...
 
   style:
     name: Style
